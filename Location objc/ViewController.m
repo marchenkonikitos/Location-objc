@@ -11,23 +11,25 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface ViewController () <MKMapViewDelegate, CLLocationManagerDelegate>
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
-//@synchronized *locationManager;
-
 @implementation ViewController
+
+@synthesize locationManager;
+@synthesize mapView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mapView.delegate = self;
+    mapView.delegate = self;
     
-    self.locationManager = [CLLocationManager new];
-    self.locationManager.delegate = self;
+    locationManager = [CLLocationManager new];
+    locationManager.delegate = self;
     
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager startUpdatingLocation];
+    [locationManager requestWhenInUseAuthorization];
+    [locationManager startUpdatingLocation];
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
